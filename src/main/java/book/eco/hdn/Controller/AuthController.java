@@ -2,6 +2,7 @@ package book.eco.hdn.Controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import book.eco.hdn.Dto.Reponse.ApiReponse;
 import book.eco.hdn.Dto.Reponse.AuthResponse;
 import book.eco.hdn.Dto.Request.LoginRequest;
 import book.eco.hdn.Service.AuthService;
@@ -21,12 +22,14 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/login")
-    public AuthResponse login(@RequestBody LoginRequest request) {
-        return authService.login(request);
+    public ApiReponse login(@RequestBody LoginRequest request) {
+        return new ApiReponse(1,"Login Success",authService.login(request));
     }
 
     @PostMapping("/refresh")
-    public AuthResponse refresh(@RequestParam String refreshToken) {
-        return authService.refresh(refreshToken);
+    public ApiReponse refresh(@RequestParam String refreshToken) {
+        return new ApiReponse(1,"Take resfresh Token Success",authService.refresh(refreshToken));
     }
+
+    
 }
